@@ -36,12 +36,20 @@
                                     <input type="text" id="name" name="username" class="form-control" placeholder="Username.." required>
                                 </div>
                                 {{-- <div> --}}
+                                    <div class="col-lg-6">
+                                        <input type="number" name="rt" class="form-control" placeholder="RT..">
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <input type="number" name="rw" class="form-control" placeholder="RW..">
+                                    </div>
+                                    <br>
                                     <input type="text" id="name" name="nama" class="form-control" placeholder="Nama.." required>
                                     <br>
                                 {{-- </div> --}}
                                 {{-- <div> --}}
                                     <input type="text" id="name" name="telp" class="form-control" placeholder="No Telp.." required>
                                     <br>
+
                                 {{-- </div> --}}
                                 {{-- <div> --}}
                                     <input type="password" id="phone" name="password" class="form-control" placeholder="Password.." required>

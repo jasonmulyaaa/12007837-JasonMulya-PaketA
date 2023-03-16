@@ -21,10 +21,10 @@ class DashboardController extends Controller
             $pengaduan_selesai = Pengaduan::where('nik', Auth::guard('masyarakat')->user()->nik)->where('status', 'selesai')->count();
         }
         else{
-            $pengaduan = Pengaduan::count();
-            $pengaduan_belumverifikasi = Pengaduan::where('status', '0')->count();
-            $pengaduan_proses = Pengaduan::where('status', 'proses')->count();
-            $pengaduan_selesai = Pengaduan::where('status', 'selesai')->count();
+            $pengaduan = Pengaduan::where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->count();
+            $pengaduan_belumverifikasi = Pengaduan::where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->where('status', '0')->count();
+            $pengaduan_proses = Pengaduan::where('id_petugas', Auth::guard('petugas')->user()->id_petugas)->where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->where('status', 'proses')->count();
+            $pengaduan_selesai = Pengaduan::where('id_petugas', Auth::guard('petugas')->user()->id_petugas)->where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->where('status', 'selesai')->count();
         }
 
         return view('dashboard', compact('pengaduan', 'pengaduan_belumverifikasi', 'pengaduan_proses', 'pengaduan_selesai'));

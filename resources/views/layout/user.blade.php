@@ -13,6 +13,7 @@
     <!-- Icon fonts -->
     <link href="{{ asset('') }}assets/user/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('') }}assets/user/css/flaticon.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('assets/pengaduan.png') }}" type="image/x-icon">
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('') }}assets/user/css/bootstrap.min.css" rel="stylesheet">
@@ -56,10 +57,11 @@
         <!-- Start header -->
         <header id="header" class="site-header header-style-2">
             <nav class="navigation navbar navbar-default">
-                <div class="site-logo">
-                    <a href="#"><img src="{{ asset('') }}assets/user/images/logo.jpg" alt></a>
-                </div>
+
                 <div class="container">
+                    <div class="site-logo">
+                        <a href="#"><img src="{{ asset('assets/pengaduan.png') }}" alt style="width: 100%; height: 98px;"></a>
+                    </div>
                     <div class="navbar-header">
                         <button type="button" class="open-btn">
                             <span class="sr-only">Toggle navigation</span>
@@ -73,6 +75,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/">Home</a></li>
                             @if (Auth::guard('masyarakat')->check())
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            @elseif (Auth::guard('petugas')->check())
                             <li><a href="/dashboard">Dashboard</a></li>
                             <li><a href="/logout">Logout</a></li>
                             @else
@@ -98,7 +103,7 @@
                         <div class="col col-md-4 col-sm-6">
                             <div class="widget about-widget">
                                 <div class="footer-logo">
-                                    <img src="{{ asset('') }}assets/user/images/footer-logo.png" alt>
+                                    <img src="{{ asset('assets/pengaduan.png') }}" alt style="width: 40%; height: 40%;">
                                 </div>
                                 <p>Pengelolaan pengaduan pelayanan masyarakat di desa yang terorganinisir dengan baik yang membuat masyarakat desa merasa puas dengan layanan kami.</p>
                             </div>
@@ -116,7 +121,7 @@
 
                         <div class="col col-md-4 col-sm-6">
                             <div class="widget quick-links-widget">
-                                <h3>Quick Links</h3>
+                                <h3>Akses Cepat</h3>
                                 <ul>
                                     <li><a href="#">Contact Us</a></li>
                                     <li><a href="#">Submit a Ticket</a></li>

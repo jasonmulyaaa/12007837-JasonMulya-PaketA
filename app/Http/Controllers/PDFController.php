@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengaduan;
+use App\Models\Petugas;
 use Illuminate\Http\Request;
 use PDF;
+use Auth;
 
 class PDFController extends Controller
 {
@@ -22,10 +24,13 @@ class PDFController extends Controller
     {
             $generatepdfs= Pengaduan::where('tgl_pengaduan', $request->awal)->Orwhere('tgl_pengaduan', $request->akhir)->get();
 
-            $pdf = PDF::loadview('admin.pdf.pdf', compact('generatepdfs'));
+            $petugas = Petugas::select('rt', 'rw')->distinct()->get();
+            $rekap = Pengaduan::where('id_petugas', Auth::guard('petugas')->user()->id_petugas)->where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->count();
+            
+            $pdf = PDF::loadview('admin.pdf.pdf', compact('generatepdfs', 'rekap', 'petugas'));
 
             $pdf->setPaper('A4', 'potrait');
 
-            return $pdf->download('pdf_file.pdf');
+            return $pdf->download('Laporan Pengaduan Masyarakat Tegallega.pdf');
     }
 }

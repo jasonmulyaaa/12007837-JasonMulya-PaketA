@@ -25,6 +25,8 @@ class Petugas extends Authenticatable
         'password',
         'telp',
         'level',
+        'rt',
+        'rw',
     ];
 
     /**

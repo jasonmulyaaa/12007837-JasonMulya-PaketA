@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('nik', 16);
             $table->text('isi_laporan');
             $table->string('foto');
-            $table->enum('status', ['0', 'proses', 'selesai']);
+            $table->enum('status', ['tolak', '0', 'proses', 'selesai']);
             $table->timestamps();
         });
     }

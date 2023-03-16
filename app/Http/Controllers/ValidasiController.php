@@ -18,11 +18,11 @@ class ValidasiController extends Controller
      */
     public function index(Request $request)
     {
-        $validasis = Pengaduan::where('status', 'proses')->orwhere('status', 'selesai')->paginate(5);
+        $validasis = Pengaduan::where('id_petugas', Auth::guard('petugas')->user()->id_petugas)->where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->paginate(5);
 
-        $validasis = Pengaduan::when($request->search, function ($query) use ($request) {
-            $query->where('isi_laporan', 'like', "%{$request->search}%")->orwhere('nik', 'like', "%{$request->search}%");
-        })->where('status', 'proses')->orwhere('status', 'selesai')->orderBy('created_at', 'desc')->paginate(5);
+        // $validasis = Pengaduan::when($request->search, function ($query) use ($request) {
+        //     $query->where('isi_laporan', 'like', "%{$request->search}%")->orwhere('nik', 'like', "%{$request->search}%");
+        // })->where('status', 'proses')->orWhere('status', 'selesai')->where('id_petugas', Auth::guard('petugas')->user()->id_petugas)->where('rt', Auth::guard('petugas')->user()->rt)->orderBy('created_at', 'desc')->paginate(5);
 
         return view('admin.validasi.index', compact('validasis'));
     }

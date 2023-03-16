@@ -22,7 +22,7 @@ class VerifikasiController extends Controller
 
         $verifikasis = Pengaduan::when($request->search, function ($query) use ($request) {
             $query->where('isi_laporan', 'like', "%{$request->search}%")->orwhere('nik', 'like', "%{$request->search}%");
-        })->where('status', '0')->orderBy('created_at', 'desc')->paginate(5);
+        })->where('rt', Auth::guard('petugas')->user()->rt)->where('rw', Auth::guard('petugas')->user()->rw)->where('status', '0')->orderBy('created_at', 'desc')->paginate(5);
 
         return view('admin.verifikasi.index', compact('verifikasis'));
     }
@@ -68,9 +68,10 @@ class VerifikasiController extends Controller
 
         $verifikasi = Pengaduan::where('id_pengaduan', $request->id_pengaduan)->first();
         $verifikasi->status = 'proses';
+        $verifikasi->id_petugas = Auth::guard('petugas')->user()->id_petugas;
         $verifikasi->update();
 
-        return redirect()->route('verifikasi.index')->with('toast_success', 'Data Pengaduan Berhasil Diproses!');
+        return redirect()->intended('validasi')->with('toast_success', 'Data Pengaduan Berhasil Diproses!');
 
     }
 
@@ -109,11 +110,11 @@ class VerifikasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $verifikasi = Pengaduan::find($id);
-        // $verifikasi->status = 'proses';
-        // $verifikasi->update();
+        $verifikasi = Pengaduan::find($id);
+        $verifikasi->status = 'ditolak';
+        $verifikasi->update();
 
-        // return back()->with('toast_success', 'Data Pengaduan Berhasil Diproses!');
+        return back()->with('toast_success', 'Data Pengaduan Berhasil Ditolak!');
     }
 
     /**

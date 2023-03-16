@@ -29,7 +29,10 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
+              <div class="brand-logo text-center">
+                <img src="{{ asset('assets/pengaduan.png') }}" alt="">
+                <br>
+                <br>
                 <h2><strong>Login Laporan (Admin)</strong></h2>
               </div>
               <h4>Halo! Selamat datang</h4>

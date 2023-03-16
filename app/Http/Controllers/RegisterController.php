@@ -44,6 +44,8 @@ class RegisterController extends Controller
             'nik' => 'required|max:16|unique:masyarakat',
             'nama' => 'required|max:35',
             'telp' => 'required|max:13',
+            'rt' => 'required|max:11',
+            'rw' => 'required|max:11',
         ]);
 
         Masyarakat::create([
@@ -52,6 +54,8 @@ class RegisterController extends Controller
             'nik' => $request->nik,
             'nama' => $request->nama,
             'telp' => $request->telp,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
         ]);
 
         Logging::create([

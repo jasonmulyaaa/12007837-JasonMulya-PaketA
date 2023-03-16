@@ -38,6 +38,14 @@
              <input type="text" class="form-control" id="exampleInputName1" placeholder="No Telp" name="telp" value="{{ $usermanagement->telp }}">
            </div>
            <div class="form-group">
+            <label for="exampleInputName1">RT</label>
+            <input type="number" class="form-control" id="exampleInputName1" placeholder="RT" name="rt" value="{{ $usermanagement->rt }}">
+           </div>
+           <div class="form-group">
+            <label for="exampleInputName1">RW</label>
+            <input type="number" class="form-control" id="exampleInputName1" placeholder="RW" name="rw" value="{{ $usermanagement->rw }}">
+          </div>
+           <div class="form-group">
              <label for="exampleInputName1">Password</label>
              <input type="text" class="form-control" id="exampleInputName1" placeholder="Password" name="password" value="">
            </div>

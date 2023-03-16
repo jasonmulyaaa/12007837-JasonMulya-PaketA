@@ -50,6 +50,9 @@ use App\Models\Tanggapan;
                    Tanggal Pengaduan
                  </th>
                  <th>
+                  RT/RW
+                </th>
+                 <th>
                      Status
                    </th>
                    <th>
@@ -59,6 +62,8 @@ use App\Models\Tanggapan;
              </thead>
              <tbody>
              @foreach ($validasis as $validasi)
+             @if ($validasi->status == 'selesai' || $validasi->status == 'proses')
+                 
                <tr>
                  <td>
                  <div style="width: 100px;">
@@ -71,9 +76,18 @@ use App\Models\Tanggapan;
                  <td>
                    {{ $validasi->tgl_pengaduan}}
                </td>
+               <td>
+                {{ $validasi->rt}}/{{ $validasi->rw }}
+               </td>
                  <td>
-                     <div @if($validasi->status == 'selesai') class="badge badge-opacity-success" @elseif($validasi->status == 'proses') class="badge badge-opacity-warning" @endif>{{ $validasi->status}}</div>
-                 </td>
+                  <div @if($validasi->status == 'selesai') class="badge badge-opacity-success" @elseif($validasi->status == 'proses') class="badge badge-opacity-warning" @elseif($validasi->status == 'ditolak') class="badge badge-opacity-danger" @elseif($validasi->status == '0') class="badge badge-opacity-info" @endif>
+                    @if ($validasi->status == '0')
+                    menunggu
+                    @else
+                    {{ $validasi->status}}
+                    @endif
+                  </div>                 
+                </td>
                  <td>
                  {{-- <form action="{{ route('validasi.destroy', $validasi->id_validasi) }}" method="POST"> --}}
 
@@ -94,6 +108,7 @@ use App\Models\Tanggapan;
                </form>
                  </td>
                </tr>
+             @endif
              </tbody>
              @endforeach
            </table>

@@ -41,6 +41,10 @@ class HomepageController extends Controller
             'isi_laporan' => 'required',
             'foto' => 'image|file|required',
             'status' => 'required',
+            'g-recaptcha-response' => 'required|captcha'
+        ],
+        [
+            'g-recaptcha-response.required' => 'Mohon konfirmasi bahwa anda bukan robot!',
         ]);
 
         $image = $request->file('foto')->store('post-images/pengaduan');
@@ -53,6 +57,9 @@ class HomepageController extends Controller
             'tgl_pengaduan' => date('Y-m-d'),
             'foto' => $validate['foto'],
             'status' => $request->status,
+            'rt' => Auth::guard('masyarakat')->user()->rt,
+            'rw' => Auth::guard('masyarakat')->user()->rw,
+            'id_petugas' => 0,
         ]);
 
         Logging::create([
@@ -64,7 +71,7 @@ class HomepageController extends Controller
             'status' => 'insert',
         ]);
 
-        return back()->with('success', 'Pengaduan Berhasil Disimpan!');
+        return redirect()->intended('pengaduan')->with('success', 'Pengaduan Berhasil Disimpan!');
     }
 
     /**

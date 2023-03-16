@@ -50,6 +50,9 @@ use App\Models\Tanggapan;
                    Tanggal Pengaduan
                  </th>
                  <th>
+                  RT/RW
+                </th>
+                 <th>
                      Status
                    </th>
                    <th>
@@ -71,15 +74,29 @@ use App\Models\Tanggapan;
                  <td>
                    {{ $verifikasi->tgl_pengaduan}}
                </td>
+                <td>
+                {{ $verifikasi->rt}}/{{ $verifikasi->rw }}
+               </td>
                  <td>
-                     <div @if($verifikasi->status == 'selesai') class="badge badge-opacity-success" @elseif($verifikasi->status == 'proses') class="badge badge-opacity-warning" @endif>{{ $verifikasi->status}}</div>
-                 </td>
+                  <div @if($verifikasi->status == 'selesai') class="badge badge-opacity-success" @elseif($verifikasi->status == 'proses') class="badge badge-opacity-warning" @elseif($verifikasi->status == 'ditolak') class="badge badge-opacity-danger" @elseif($verifikasi->status == '0') class="badge badge-opacity-info" @endif>
+                    @if ($verifikasi->status == '0')
+                    menunggu
+                    @else
+                    {{ $verifikasi->status}}
+                    @endif
+                  </div>                    
+                </td>
                  <td>
                  {{-- <form action="{{ route('verifikasi.destroy', $verifikasi->id_verifikasi) }}" method="POST"> --}}
 
 
-                 <a class="btn rounded-pill btn-info" href="{{ route('verifikasi.show', $verifikasi->id_pengaduan)}}">Detail</a>
-                 <a class="btn rounded-pill btn-success" href="{{ route('verifikasi.edit', $verifikasi->id_pengaduan)}}">Proses & Tanggapi</a>
+                 <form action="{{ route('verifikasi.update', $verifikasi->id_pengaduan) }}" method="post">
+                @csrf
+                @method('PUT')
+                <a class="btn rounded-pill btn-info" href="{{ route('verifikasi.show', $verifikasi->id_pengaduan)}}">Detail</a>
+                <button class="btn rounded-pill btn-danger" href="{{ route('verifikasi.update', $verifikasi->id_pengaduan)}}">Tolak</button>
+                <a class="btn rounded-pill btn-success" href="{{ route('verifikasi.edit', $verifikasi->id_pengaduan)}}">Proses & Tanggapi</a>
+              </form>
 
                  {{-- @csrf
                  @method('DELETE')

@@ -14,7 +14,15 @@ class LoginUserController extends Controller
      */
     public function index()
     {
-        return view('user.login.index');
+        if (Auth::guard('petugas')->check()) {
+            return abort(404);
+        }
+        elseif(Auth::guard('masyarakat')->check()){
+            return redirect()->intended('/dashboard');
+        }
+        else{
+            return view('user.login.index');
+        }
     }
 
     public function authenticate(Request $request){
@@ -27,7 +35,7 @@ class LoginUserController extends Controller
         if (Auth::guard('masyarakat')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/')->with('success', 'Anda Berhasil Login! Silahkan Isi Pengaduan Anda.');
         }
 
         return back()->with('loginError', 'Login Failed!');

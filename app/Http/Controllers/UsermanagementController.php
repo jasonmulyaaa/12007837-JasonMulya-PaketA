@@ -50,6 +50,8 @@ class UsermanagementController extends Controller
             'password' => 'required',
             'telp' => 'required|max:13',
             'level' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
         ]);
 
         Petugas::create([
@@ -58,6 +60,8 @@ class UsermanagementController extends Controller
             'password' => Hash::make($request->password),
             'telp' => $request->telp,
             'level' => $request->level,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
         ]);
 
         Logging::create([
@@ -110,6 +114,8 @@ class UsermanagementController extends Controller
             'telp' => 'required',
             'username' => 'required',
             'level' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
             'password',
         ]);
 

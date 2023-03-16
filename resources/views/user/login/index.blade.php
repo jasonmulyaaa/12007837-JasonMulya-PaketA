@@ -49,7 +49,7 @@
                     </div>
                     <div class="col col-md-5 col-md-offset-1">
                         <div class="contact-info">
-                            <img src="{{ asset('') }}1.png" alt="">
+                            <img src="{{ asset('') }}1.webp" alt="">
                         </div>
                     </div>
                 </div>            

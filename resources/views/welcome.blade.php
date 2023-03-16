@@ -6,8 +6,8 @@
                 <div class="row">
                     <div class="col col-md-6 col-sm-8">
                         <div class="content">
-                            <h2>Laporan Pengaduan Masyrakyat Desa</h2>
-                            <p>Pengelolaan pengaduan pelayanan masyarakat di desa yang terorganinisir dengan baik yang membuat masyarakat desa merasa puas dengan layanan kami.</p>
+                            <h2>Laporan Pengaduan Masyarakyat Desa Tegallega</h2>
+                            <p>Pengelolaan pengaduan pelayanan masyarakat di desa Tegallega yang terorganinisir dengan baik yang membuat masyarakat desa merasa puas dengan layanan kami.</p>
                             {{-- <div class="btns">
                                 <a href="#"><img src="{{ asset('') }}assets/user/images/app-store.jpg" alt></a>
                                 <a href="#"><img src="{{ asset('') }}assets/user/images/play-store.jpg" alt></a>
@@ -50,7 +50,12 @@
                                     <input type="file" name="foto" class="form-control" placeholder="Foto..">
                                     <br>
                                     <textarea class="form-control" id="message" name="isi_laporan" placeholder="Laporan.."></textarea>
+                                    <br>
+
                                     <input type="hidden" name="status" value="0">
+                                    <br>
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display() !!}
                                 <div class="submit" style="margin-top: 30px;">
                                     <button type="submit">Submit</button>
                                     <div id="loader">
@@ -65,6 +70,14 @@
                         </div>
                     </div>
                 </div>     
+                @elseif(Auth::guard('petugas')->check())
+                <div class="row">
+                    <div class="col col-xs-12">
+                        <div class="section-title-s3">
+                            <span>Form Pengaduan</span>
+                            <h2>Anda Bukanlah Masyarakat</h2>
+                    </div>
+                </div>  
                 @else
                 <div class="row">
                     <div class="col col-xs-12">

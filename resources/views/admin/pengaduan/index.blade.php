@@ -50,6 +50,9 @@ use App\Models\Tanggapan;
                    Tanggal Pengaduan
                  </th>
                  <th>
+                  RT/RW
+                </th>
+                 <th>
                      Status
                    </th>
                    <th>
@@ -71,8 +74,17 @@ use App\Models\Tanggapan;
                  <td>
                    {{ $pengaduan->tgl_pengaduan}}
                </td>
+                <td>
+                {{ $pengaduan->rt}}/{{ $pengaduan->rw }}
+               </td>
                  <td>
-                     <div @if($pengaduan->status == 'selesai') class="badge badge-opacity-success" @elseif($pengaduan->status == 'proses') class="badge badge-opacity-warning" @endif>{{ $pengaduan->status}}</div>
+                     <div @if($pengaduan->status == 'selesai') class="badge badge-opacity-success" @elseif($pengaduan->status == 'proses') class="badge badge-opacity-warning" @elseif($pengaduan->status == 'ditolak') class="badge badge-opacity-danger" @elseif($pengaduan->status == '0') class="badge badge-opacity-info" @endif>
+                      @if ($pengaduan->status == '0')
+                      menunggu
+                      @else
+                      {{ $pengaduan->status}}
+                      @endif
+                    </div>
                  </td>
                  <td>
                  {{-- <form action="{{ route('pengaduan.destroy', $pengaduan->id_pengaduan) }}" method="POST"> --}}

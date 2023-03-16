@@ -2,6 +2,7 @@
 @section('content')
 <?php
 use App\Models\Tanggapan;
+use App\Models\Petugas;
 ?>
 {{-- @if ($errors->any())
 <div class="alert alert-danger">
@@ -28,8 +29,26 @@ use App\Models\Tanggapan;
            <address>
              <h4 class="fw-bold">Foto</h4>
              <br>
-             <img src="{{ asset('storage/' . $verifikasi->foto) }}" alt="course" onerror="this.onerror=null; this.src='../../assets/images/faces/icon.png'" style="width: 240px; height: 240px; object-fit: cover;">
-             <br>
+             <!-- Button trigger modal -->
+             <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border: none;">
+              <img src="{{ asset('storage/' . $verifikasi->foto) }}" alt="course" onerror="this.onerror=null; this.src='../../assets/images/faces/icon.png'" style="width: 240px; height: 240px; object-fit: cover;">
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Foto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <img src="{{ asset('storage/' . $verifikasi->foto) }}" alt="course" onerror="this.onerror=null; this.src='../../assets/images/faces/icon.png'" style="width: 100%; height: 100%;">
+                  </div>
+                </div>
+              </div>
+            </div>             
+            <br>
              <br>
              <h5>
                 <b>Nama Pengadu: </b> {!! $nama->nama !!}
@@ -70,6 +89,21 @@ use App\Models\Tanggapan;
                (Tanggapan Belum Ditanggapi oleh Petugas)
              </p>
              @endif
+             <h5 class="fw-bold">
+              Ditanggapi Oleh:
+            </h5>
+            @if ($tanggapan)
+            @php
+                $petugas = Petugas::where('id_petugas', $tanggapan->id_petugas)->first();
+            @endphp
+            <p class="mb-2">
+              {!! $petugas->nama_petugas !!}
+            </p>
+            @else
+            <p class="mb-2">
+              (Belum ada yang menanggapi)
+            </p>
+            @endif
 
            </address>
          </div>

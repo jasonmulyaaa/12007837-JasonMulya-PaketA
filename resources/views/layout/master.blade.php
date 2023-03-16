@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-use App\Models\Konfigurasi;
-?>
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -27,9 +24,7 @@ use App\Models\Konfigurasi;
 <link rel="shortcut icon" href="{{ asset('') }}assets/images" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-{{-- @php
-$konfigurasi = Konfigurasi::first();
-@endphp --}}
+
 </head>
 <body>
 <div class="container-scroller">
@@ -42,9 +37,9 @@ $konfigurasi = Konfigurasi::first();
 </button>
 </div>
 <div>
-{{-- <a class="navbar-brand brand-logo" href="/">
- <img src="{{ asset('storage/'. $konfigurasi->logo) }}" alt="logo" style="width: 100%; height: 70px; border-radius: 100%;"/>
-</a> --}}
+<a class="navbar-brand brand-logo" href="/">
+ <img src="{{ asset('assets/pengaduan.png') }}" alt="logo" style="width: 100%; height: 70px; border-radius: 100%;"/>
+</a>
 {{-- <a class="navbar-brand brand-logo-mini" href="index.html">
  <img src="images/logo-mini.svg" alt="logo" />
 </a> --}}
@@ -126,39 +121,32 @@ $konfigurasi = Konfigurasi::first();
    <span class="menu-title">Dashboard</span>
  </a>
 </li>
-{{-- <li class="nav-item">
- <a class="nav-link" href="">
-   <i class="mdi mdi-grid-large menu-icon"></i>
-   <span class="menu-title">Menu Navigasi</span>
- </a>
-</li> --}}
 
-{{-- @else --}}
-<li class="nav-item nav-category">Homepage</li>
+<li class="nav-item nav-category">Menu</li>
 @if (Auth::guard('petugas')->check())
 
 @if (Auth::guard('petugas')->user()->level == 'admin')
 <li class="nav-item">
  <a class="nav-link" href="{{ route('verifikasi.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-search"></i>
    <span class="menu-title">Verifikasi</span>
  </a>
 </li>
 <li class="nav-item">
  <a class="nav-link" href="{{ route('validasi.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-check"></i>
    <span class="menu-title">Validasi & Tanggapan</span>
  </a>
 </li>
 <li class="nav-item">
  <a class="nav-link" href="{{ route('usermanagement.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-key"></i>
    <span class="menu-title">Petugas Management</span>
  </a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="{{ route('pdf') }}">
-    <i class="menu-icon mdi mdi mdi-account-settings"></i>
+    <i class="menu-icon mdi mdi mdi-archive"></i>
     <span class="menu-title">Generate Laporan</span>
   </a>
  </li>
@@ -171,13 +159,13 @@ $konfigurasi = Konfigurasi::first();
 @elseif (Auth::guard('petugas')->user()->level == 'petugas')
 <li class="nav-item">
  <a class="nav-link" href="{{ route('verifikasi.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-search"></i>
    <span class="menu-title">Verifikasi</span>
  </a>
 </li>
 <li class="nav-item">
  <a class="nav-link" href="{{ route('validasi.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-check"></i>
    <span class="menu-title">Validasi & Tanggapan</span>
  </a>
 </li>
@@ -187,28 +175,12 @@ $konfigurasi = Konfigurasi::first();
 @if (Auth::guard('masyarakat')->check())
 <li class="nav-item">
  <a class="nav-link" href="{{ route('pengaduan.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-settings"></i>
+   <i class="menu-icon mdi mdi mdi-account-plus"></i>
    <span class="menu-title">Pengaduan</span>
  </a>
 </li>
 @endif
 
-
-{{-- @endif --}}
-
-{{-- <li class="nav-item nav-category">Contact Us Form</li>
-<li class="nav-item">
- <a class="nav-link" href="{{ route('contactus.index') }}">
-   <i class="menu-icon mdi mdi mdi-settings"></i>
-   <span class="menu-title">Contact Us Form</span>
- </a>
-</li>
-<li class="nav-item">
- <a class="nav-link" href="{{ route('contactform.index') }}">
-   <i class="menu-icon mdi mdi mdi-account-card-details"></i>
-   <span class="menu-title">Contact Form CV</span>
- </a>
-</li>  --}}
 </ul>
 </nav>
 <!-- partial -->
@@ -242,23 +214,6 @@ $konfigurasi = Konfigurasi::first();
 
 
 <!-- Page specific script -->
-<script>
-$(function () {
-$("#example1").DataTable({
-"responsive": true, "lengthChange": false, "autoWidth": false,
-"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-$('#example2').DataTable({
-"paging": true,
-"lengthChange": false,
-"searching": false,
-"ordering": true,
-"info": true,
-"autoWidth": false,
-"responsive": true,
-});
-});
-</script>
 
 <script>
 document.addEventListener('trix-file-accept', function(e){
@@ -283,258 +238,6 @@ oFReader.onload = function (oFREvent) {
 
 </script>
 
-{{-- <script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedTestimonial").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('testimonial.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedPortfolio").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('portfolio.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedBlog").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('blog.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedEducation").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('education.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedWorking").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('working.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedSkill").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('skill.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedService").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('service.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedSosial").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('sosial.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
-
-<script>
-$(function(e){
-$("#chkCheckAll").click(function(){
-$(".checkBoxClass").prop('checked',$(this).prop('checked'));
-});
-$("#deleteAllSelectedTutorial").click(function(e){
-e.preventDefault();
-var allids = [];
-$("input:checkbox[name=ids]:checked").each(function(){
-allids.push($(this).val());
-});
-$.ajax({
-url:"{{ route('tutorial.deleteSelected') }}",
-type:"DELETE",
-data:{
-_token:$("input[name=_token]").val(),
-ids:allids
-},
-success:function(response){
-$.each(allids,function(key,val){
- $("#sid"+val).remove();
-})
-}
-});
-})
-});
-</script>
---}}
 
 @include('sweetalert::alert')
 </body>
